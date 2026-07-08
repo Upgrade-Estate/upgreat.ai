@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { Link } from 'react-router-dom'
 import type { Chapter } from '../content/chapters'
 
 /** Title with the highlight substring rendered in lime. */
@@ -57,12 +58,12 @@ const ChapterPanel = forwardRef<HTMLDivElement, { chapter: Chapter }>(function C
           ))}
         </div>
         {chapter.id === 'outro' && (
-          <a
-            href="/"
+          <Link
+            to="/"
             className="mt-1 rounded-full bg-lime px-5 py-2 text-sm font-semibold text-teal-deep hover:bg-lime-pale"
           >
             Back to Upgreat AI →
-          </a>
+          </Link>
         )}
       </div>
     </div>

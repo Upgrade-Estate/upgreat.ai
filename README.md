@@ -5,6 +5,8 @@ battery inside a residential building, the battery powers a pod of submersed
 (immersion-cooled) AI servers, and the servers' waste heat warms the building's
 warm-water tank — all the way to a hot shower.
 
+**Live:** https://upgrade-estate.github.io/upgreat.ai/
+
 ## Pages
 
 - `/` — branded landing page
@@ -24,6 +26,12 @@ npm run build      # typecheck + production bundle in dist/
 npm run preview    # serve the production build
 npm run shots      # headless screenshot pass (playwright-core + system chromium)
 ```
+
+## Deploy
+
+Pushes to `claude/solar-wind-energy-viz-gjrpqw` trigger `.github/workflows/deploy-pages.yml`,
+which builds with `GHPAGES=1` (sets the Vite base to `/upgreat.ai/`), adds a SPA `404.html`
+fallback, and publishes to GitHub Pages.
 
 ## How the visualization works
 
