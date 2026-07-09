@@ -29,6 +29,13 @@ npm run shots      # headless screenshot pass (playwright-core + system chromium
 
 ## Deploy
 
+**Bootload (container hosting):** pushes to the branch also trigger
+`.github/workflows/deploy-bootload.yml`, which builds the `Dockerfile`
+(nginx serving `dist/` with SPA routing), pushes it to
+`registry.bootload.io` and deploys it via the bootload CLI using the
+`BL_DEPLOY` repository secret (`BOOTLOAD_TOKEN`).
+
+
 Pushes to `claude/solar-wind-energy-viz-gjrpqw` trigger `.github/workflows/deploy-pages.yml`,
 which builds with `GHPAGES=1` (sets the Vite base to `/upgreat.ai/`), adds a SPA `404.html`
 fallback, and publishes to GitHub Pages.
