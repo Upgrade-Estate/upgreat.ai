@@ -46,7 +46,17 @@ jobs:
       - name: Deploy service
         run: |
           set -euo pipefail
-          OUT=$(bootload deploy --project test1 --image "${{ steps.push.outputs.image }}" --port 80:http --publish --name energy-loop 2>&1) || { echo "$OUT"; exit 1; }
+          IMAGE="${{ steps.push.outputs.image }}"
+          if ! OUT=$(bootload deploy --project test1 --image "$IMAGE" --port 80:http --publish --name energy-loop 2>&1); then
+            echo "$OUT"
+            case "$OUT" in
+              *"already exists"*)
+                echo "Service exists — rolling out new image instead."
+                OUT=$(bootload restart energy-loop --project test1 --image "$IMAGE" 2>&1) || { echo "$OUT"; exit 1; }
+                ;;
+              *) exit 1 ;;
+            esac
+          fi
           echo "$OUT"
           # Route is printed without a scheme (e.g. "route foo.fr1.apps.bootload.io -> :80").
           HOST=$(echo "$OUT" | grep -oE '[a-z0-9.-]+\.apps\.bootload\.io' | head -1 || true)
@@ -58,4 +68,8 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Service status
-        run: bootload status energy-loop --project test1
+        run: |
+          sleep 20
+          bootload status energy-loop --project test1 || true
+          echo "--- recent logs ---"
+          timeout 30 bootload logs energy-loop --project test1 2>&1 | tail -50 || true
