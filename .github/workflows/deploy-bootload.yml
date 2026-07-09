@@ -34,17 +34,19 @@ jobs:
           bootload image login
           OUT=$(bootload image push energy-loop:${{ github.sha }} 2>&1) || { echo "$OUT"; exit 1; }
           echo "$OUT"
-          IMAGE=$(echo "$OUT" | grep -oE 'registry\.bootload\.io/[^[:space:]]+' | head -1)
+          # docker prints the repo in brackets and without the tag — strip and re-tag.
+          IMAGE=$(echo "$OUT" | tr -d '[]' | grep -oE 'registry\.bootload\.io/[^[:space:]]+' | head -1)
           if [ -z "$IMAGE" ]; then
             echo "Could not determine pushed image ref from CLI output" >&2
             exit 1
           fi
+          case "$IMAGE" in *:*) ;; *) IMAGE="$IMAGE:${{ github.sha }}" ;; esac
           echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
 
       - name: Deploy service
         run: |
           set -euo pipefail
-          OUT=$(bootload deploy --image "${{ steps.push.outputs.image }}" --port 80:http --publish --name energy-loop 2>&1) || { echo "$OUT"; exit 1; }
+          OUT=$(bootload deploy --project test1 --image "${{ steps.push.outputs.image }}" --port 80:http --publish --name energy-loop 2>&1) || { echo "$OUT"; exit 1; }
           echo "$OUT"
           URL=$(echo "$OUT" | grep -oE 'https://[^[:space:]]+' | head -1)
           {
@@ -55,4 +57,4 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Service status
-        run: bootload status energy-loop
+        run: bootload status energy-loop --project test1
