@@ -31,6 +31,7 @@ jobs:
         id: push
         run: |
           set -euo pipefail
+          bootload image login
           OUT=$(bootload image push energy-loop:${{ github.sha }} 2>&1) || { echo "$OUT"; exit 1; }
           echo "$OUT"
           IMAGE=$(echo "$OUT" | grep -oE 'registry\.bootload\.io/[^[:space:]]+' | head -1)

@@ -1,6 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#054440"/>
-  <path d="M32 10a22 22 0 1 0 22 22" fill="none" stroke="#97d068" stroke-width="6" stroke-linecap="round"/>
-  <path d="M54 32a22 22 0 0 0-22-22" fill="none" stroke="#d1f58c" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
-  <circle cx="32" cy="32" r="7" fill="#d1f58c"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="274.4 391.7 280 280">
+  <defs>
+    <style>
+      .st0 { fill: #97d068; }
+      .st3 { fill: #d1f58c; }
+    </style>
+  </defs>
+  <circle class="st3" cx="413.9" cy="424.2" r="29.3"/>
+  <circle class="st3" cx="413.9" cy="639.3" r="29.3"/>
+  <rect class="st0" x="462.1" y="427.7" width="55.9" height="55.9" rx="21.4" ry="21.4" transform="translate(-162.2 306.1) rotate(-30)"/>
+  <rect class="st0" x="309.9" y="579.3" width="55.9" height="55.9" rx="21.4" ry="21.4" transform="translate(-258.4 250.3) rotate(-30)"/>
+  <path class="st3" d="M508.6,499.7h0s0,0,0,0c39.6,16.2,42.8,24,26.7,63.5h0s0,0,0,0c-39.6-16.2-42.8-24-26.7-63.5Z"/>
+  <path class="st3" d="M324.4,502.4h0s0,0,0,0c9.8,41.6,5.4,48.8-36.2,58.6h0s0,0,0,0c-9.8-41.6-5.4-48.8,36.2-58.6Z"/>
+  <path class="st0" d="M504.9,583.8c10.6,6.6,13.9,21.2,7.3,31.8-6.8,10.9-25.6,14.7-38,17.2-3.1-12.3-7.9-30.8-1.1-41.7,6.6-10.6,21.2-13.9,31.8-7.3Z"/>
+  <path class="st0" d="M347.2,432c10.2,7.2,12.8,21.8,5.7,32.1-7.3,10.5-26.3,13.4-38.8,15.3-2.5-12.4-6.3-31.2,1-41.7,7.2-10.2,21.8-12.8,32.1-5.7Z"/>
 </svg>
